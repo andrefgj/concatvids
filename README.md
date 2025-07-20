@@ -100,5 +100,5 @@ pip install -e .
 
 Contribuições são bem-vindas! Abra uma issue ou pull request se quiser sugerir melhorias ou corrigir problemas.
 
-✍️ Créditos
+## ✍️ Créditos
 Este projeto foi idealizado por André F. e desenvolvido com suporte técnico do ChatGPT, da OpenAI.
