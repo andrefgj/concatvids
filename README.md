@@ -45,6 +45,7 @@ pip install .
 ### Comando básico:
 
 ```bash
+cd pasta_com_videos
 concatvids
 ```
 
