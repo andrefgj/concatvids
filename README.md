@@ -1,6 +1,6 @@
 # concatvids
 
-**concatvids** é uma ferramenta de linha de comando em Python para concatenar arquivos de vídeo (como `.mp4`) usando o `ffmpeg`, ordenando-os automaticamente por data de modificação. Ideal para juntar clipes gravados separadamente de forma simples e rápida.
+**concatvids** é uma ferramenta de linha de comando em Python para concatenar arquivos de vídeo (como .mp4) usando o ffmpeg, ordenando-os automaticamente por data de modificação. Muito útil para juntar clipes gravados separadamente, como vídeos produzidos pela GoPro, de forma simples e rápida.
 
 ---
 
