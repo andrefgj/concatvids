@@ -10,6 +10,7 @@
 - Gera automaticamente um `filelist.txt` no formato aceito pelo `ffmpeg`
 - Concatena vídeos via `ffmpeg` usando o modo rápido (`-c copy`)
 - Permite definir o nome do arquivo de saída via argumento `-o`
+- Upload opcional para o YouTube com autenticação segura via OAuth2
 - Compatível com Windows, Linux e macOS (requer `ffmpeg` instalado)
 
 ---
@@ -37,6 +38,8 @@ pip install .
 
 * Python 3.7+
 * [`ffmpeg`](https://ffmpeg.org/download.html) instalado e disponível no `PATH`
+* Conta Google com acesso ao [YouTube Data API v3](https://console.developers.google.com/)
+* Arquivo client_secrets.json no diretório do script, obtido no [Google Cloud Console](https://console.cloud.google.com/)
 
 ---
 
@@ -70,6 +73,18 @@ concatvids --ext mov -o resultado.mov
 
 ---
 
+📤 Fazer upload para o YouTube
+
+Exemplo com upload ativado:
+
+```
+concatvids --upload --title "Treino 21/07" --description "Descidas com palmar" --tags nado treino gopro
+```
+
+Se não fornecer `--title` ou `--description`, será solicitado interativamente. O vídeo será enviado como não listado e não destinado a crianças por padrão.
+
+---
+
 ## 📝 Exemplo de `filelist.txt` gerado
 
 ```text
@@ -82,11 +97,16 @@ file 'clip3.mp4'
 
 ## 🛠 Desenvolvimento
 
-Se quiser contribuir ou modificar:
+### Instalar em modo editável:
 
-```bash
-# Reinstalar localmente após alterações
+```
 pip install -e .
+```
+
+### Requisitos de desenvolvimento:
+
+```
+pip install -r requirements.txt
 ```
 
 ---
