@@ -39,7 +39,7 @@ pip install .
 * Python 3.7+
 * [`ffmpeg`](https://ffmpeg.org/download.html) instalado e disponível no `PATH`
 * Conta Google com acesso ao [YouTube Data API v3](https://console.developers.google.com/)
-* Arquivo client_secrets.json no diretório do script, obtido no [Google Cloud Console](https://console.cloud.google.com/)
+* Arquivo `client_secrets.json` salvo em ~/.config/concatvids/. Obtenha este arquivo no [Google Cloud Console](https://console.cloud.google.com/) após ativar a **YouTube Data API v3**.
 
 ---
 

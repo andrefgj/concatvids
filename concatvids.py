@@ -7,11 +7,36 @@ from pathlib import Path
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+import webbrowser
+from time import sleep
 
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
 def youtube_authenticate():
-    flow = InstalledAppFlow.from_client_secrets_file('client_secrets.json', SCOPES)
+    config_path = Path.home() / ".config" / "concatvids" / "client_secrets.json"
+    
+    if not config_path.exists():
+        print(f"\n🔒 Credenciais do YouTube não encontradas em:\n  {config_path}\n")
+        print("Para usar o upload, siga estes passos:\n")
+        print("1. Acesse o Google Cloud Console:")
+        print("   https://console.cloud.google.com/apis/credentials")
+        print("2. Crie um projeto e ative a API 'YouTube Data API v3'")
+        print("3. Crie credenciais do tipo 'OAuth - aplicativo de área de trabalho'")
+        print("4. Baixe o arquivo JSON e salve como:")
+        print(f"   {config_path}")
+        print("\nAbrindo o navegador para facilitar...\n")
+
+        try:
+            os.makedirs(config_path.parent, exist_ok=True)
+        except Exception as e:
+            print(f"❌ Erro ao criar diretório: {e}")
+            exit(1)
+
+        webbrowser.open("https://console.cloud.google.com/apis/credentials")
+        sleep(2)
+        exit(1)
+
+    flow = InstalledAppFlow.from_client_secrets_file(str(config_path), SCOPES)
     creds = flow.run_local_server(port=8080)
     return build('youtube', 'v3', credentials=creds)
 
