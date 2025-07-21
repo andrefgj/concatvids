@@ -9,4 +9,9 @@ setup(
             "concatvids=concatvids:main",
         ],
     },
+    install_requires=[
+        "google-api-python-client",
+        "google-auth",
+        "google-auth-oauthlib"
+    ],
 )
