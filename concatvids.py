@@ -88,7 +88,10 @@ def main():
 
     args = parser.parse_args()
     ext = args.ext.lower()
-    arquivos = sorted(Path(".").glob(f"*.{ext}"), key=lambda x: x.stat().st_mtime)
+    arquivos = sorted(
+        [f for f in Path(".").iterdir() if f.is_file() and f.suffix.lower() == f".{ext}"],
+        key=lambda x: x.stat().st_mtime
+    )
 
     if not arquivos:
         print(f"Nenhum arquivo .{ext} encontrado no diretório atual.")
