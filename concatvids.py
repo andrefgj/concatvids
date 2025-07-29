@@ -85,6 +85,7 @@ def main():
     parser.add_argument("--title", help="Título do vídeo no YouTube")
     parser.add_argument("--description", help="Descrição do vídeo no YouTube")
     parser.add_argument("--tags", nargs='*', help="Lista de tags (separadas por espaço)")
+    parser.add_argument("--reencode", action="store_true", help="Força reencodificação para evitar erros de timestamps")
 
     args = parser.parse_args()
     ext = args.ext.lower()
@@ -103,8 +104,15 @@ def main():
 
     cmd = [
         "ffmpeg", "-f", "concat", "-safe", "0",
-        "-i", "filelist.txt", "-c", "copy", args.output
+        "-i", "filelist.txt"
     ]
+
+    if args.reencode:
+        cmd += ["-c:v", "libx264", "-c:a", "aac"]
+    else:
+        cmd += ["-c", "copy"]
+
+    cmd += [args.output]
 
     try:
         subprocess.run(cmd, check=True)
