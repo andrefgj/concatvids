@@ -11,6 +11,7 @@
 - Concatena vídeos via `ffmpeg` usando o modo rápido (`-c copy`)
 - Permite definir o nome do arquivo de saída via argumento `-o`
 - Upload opcional para o YouTube com autenticação segura via OAuth2
+- Reencodificação opcional para garantir compatibilidade de áudio/vídeo
 - Compatível com Windows, Linux e macOS (requer `ffmpeg` instalado)
 
 ---
@@ -73,15 +74,31 @@ concatvids --ext mov -o resultado.mov
 
 ---
 
-📤 Fazer upload para o YouTube
+### 📤 Fazer upload para o YouTube e evitar erros com timestamps
 
 Exemplo com upload ativado:
 
-```
+```bash
 concatvids --upload --title "Treino 21/07" --description "Descidas com palmar" --tags nado treino gopro
 ```
 
-Se não fornecer `--title` ou `--description`, será solicitado interativamente. O vídeo será enviado como não listado e não destinado a crianças por padrão.
+Se não fornecer `--title` ou `--description`, será solicitado interativamente. O vídeo será enviado como **não listado** e **não destinado a crianças** por padrão.
+
+#### ⚠️ Problemas com timestamps?
+
+Alguns vídeos (como os gerados por GoPro ou celular) podem apresentar mensagens de erro como:
+
+```
+Non-monotonic DTS; this may result in incorrect timestamps in the output file.
+```
+
+Para evitar isso, use a opção `--reencode`:
+
+```bash
+concatvids --reencode -o video_final.mp4
+```
+
+Isso força o `ffmpeg` a reencodar os vídeos com `libx264` (vídeo) e `aac` (áudio), garantindo maior compatibilidade e sincronização correta, embora leve mais tempo.
 
 ---
 
@@ -122,4 +139,5 @@ pip install -r requirements.txt
 Contribuições são bem-vindas! Abra uma issue ou pull request se quiser sugerir melhorias ou corrigir problemas.
 
 ## ✍️ Créditos
+
 Este projeto foi idealizado por André F. e desenvolvido com suporte técnico do ChatGPT, da OpenAI.
