@@ -88,7 +88,7 @@ def main():
     parser.add_argument("--reencode", action="store_true", help="Força reencodificação para evitar erros de timestamps")
     parser.add_argument("-i", "--input", help="Arquivo de entrada (para corte)")
     parser.add_argument("--ss", help="Tempo inicial do corte (formato hh:mm:ss ou segundos)")
-    parser.add_argument("-to", dest="to", help="Tempo final do corte (formato hh:mm:ss ou segundos)")
+    parser.add_argument("--to", dest="to", help="Tempo final do corte (formato hh:mm:ss ou segundos)")
 
     args = parser.parse_args()
     ext = args.ext.lower()
