@@ -12,6 +12,7 @@
 - Permite definir o nome do arquivo de saída via argumento `-o`
 - Upload opcional para o YouTube com autenticação segura via OAuth2
 - Reencodificação opcional para garantir compatibilidade de áudio/vídeo
+- Corte opcional de vídeo com `--ss` (início) e `--to` (fim)
 - Compatível com Windows, Linux e macOS (requer `ffmpeg` instalado)
 
 ---
@@ -23,7 +24,7 @@
 ```bash
 git clone git@github.com:seu-usuario/concatvids.git
 cd concatvids
-````
+```
 
 ### 2. Instale com `pip`:
 
@@ -74,6 +75,18 @@ concatvids --ext mov -o resultado.mov
 
 ---
 
+### ✂️ Cortando um vídeo
+
+Também é possível cortar um único vídeo informando o **tempo de início** (`--ss`) e o **tempo de fim** (`--to`):
+
+```bash
+concatvids -i input.mp4 --ss 00:00:10 --to 00:00:20 -o trecho.mp4
+```
+
+Se `-o` não for informado, o arquivo de saída padrão será `output.mp4`.
+
+---
+
 ### 📤 Fazer upload para o YouTube e evitar erros com timestamps
 
 Exemplo com upload ativado:
@@ -84,21 +97,11 @@ concatvids --upload --title "Treino 21/07" --description "Descidas com palmar" -
 
 Se não fornecer `--title` ou `--description`, será solicitado interativamente. O vídeo será enviado como **não listado** e **não destinado a crianças** por padrão.
 
-#### ⚠️ Problemas com timestamps?
-
-Alguns vídeos (como os gerados por GoPro ou celular) podem apresentar mensagens de erro como:
-
-```
-Non-monotonic DTS; this may result in incorrect timestamps in the output file.
-```
-
-Para evitar isso, use a opção `--reencode`:
+Para evitar problemas com timestamps (erros do tipo `Non-monotonic DTS`), use a opção `--reencode`:
 
 ```bash
 concatvids --reencode -o video_final.mp4
 ```
-
-Isso força o `ffmpeg` a reencodar os vídeos com `libx264` (vídeo) e `aac` (áudio), garantindo maior compatibilidade e sincronização correta, embora leve mais tempo.
 
 ---
 
@@ -116,13 +119,13 @@ file 'clip3.mp4'
 
 ### Instalar em modo editável:
 
-```
+```bash
 pip install -e .
 ```
 
 ### Requisitos de desenvolvimento:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
